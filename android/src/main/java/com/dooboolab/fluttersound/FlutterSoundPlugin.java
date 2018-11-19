@@ -109,19 +109,6 @@ public class FlutterSoundPlugin implements MethodCallHandler, PluginRegistry.Req
 
   @Override
   public void startRecorder(String path, final Result result) {
-    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-      if (
-          reg.activity().checkSelfPermission(Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED
-              || reg.activity().checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED
-          ) {
-        reg.activity().requestPermissions(new String[]{
-            Manifest.permission.RECORD_AUDIO,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE,
-        }, 0);
-        result.error(TAG, "NO PERMISSION GRANTED", Manifest.permission.RECORD_AUDIO + " or " + Manifest.permission.WRITE_EXTERNAL_STORAGE);
-        return;
-      }
-    }
 
     Log.d(TAG, "startRecorder");
 
